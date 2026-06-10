@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wash Time — Spălătorie Auto Chișinău</title>
+  <meta name="description" content="Wash Time — spălătorie auto rapidă și de calitate în Chișinău. Programare online, zonă de așteptare cu cafea. Prețuri rezonabile." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #0a5c8a;
+      --primary-dark: #064269;
+      --primary-light: #d4eaf7;
+      --accent: #f5a623;
+      --accent-hover: #e09512;
+      --text: #1a1a2e;
+      --text-light: #555;
+      --bg: #ffffff;
+      --bg-alt: #f4f8fb;
+      --bg-dark: #0a2a3f;
+      --white: #ffffff;
+      --shadow: 0 4px 24px rgba(10, 92, 138, 0.10);
+      --shadow-lg: 0 12px 48px rgba(10, 92, 138, 0.15);
+      --radius: 12px;
+      --radius-lg: 20px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* ===== LANGUAGE SWITCHER ===== */
+    .lang-switcher {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      padding: 5px 6px;
+      border-radius: 40px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+      border: 1px solid rgba(10,92,138,0.12);
+    }
+    .lang-switcher button {
+      background: none;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      color: var(--text-light);
+      font-family: inherit;
+    }
+    .lang-switcher button.active {
+      background: var(--primary);
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(10,92,138,0.25);
+    }
+    .lang-switcher button:hover:not(.active) { color: var(--primary); }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 900;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(10,92,138,0.08);
+      padding: 14px 0;
+      transition: var(--transition);
+    }
+    .nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+    .nav-logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.1rem;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text);
+      transition: var(--transition);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: var(--transition);
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: var(--accent);
+      color: var(--white) !important;
+      padding: 10px 24px;
+      border-radius: 40px;
+      font-weight: 600 !important;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--accent-hover) !important; color: var(--white) !important; }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      background: linear-gradient(135deg, var(--bg-dark) 0%, #0a3c5a 40%, var(--primary) 100%);
+      overflow: hidden;
+      padding-top: 80px;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 90%, rgba(245,166,35,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 90% 10%, rgba(255,255,255,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-shapes {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .hero-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.07;
+    }
+    .hero-shape-1 {
+      width: 600px; height: 600px;
+      background: var(--accent);
+      top: -200px; right: -200px;
+    }
+    .hero-shape-2 {
+      width: 400px; height: 400px;
+      background: var(--white);
+      bottom: -100px; left: -100px;
+    }
+    .hero-shape-3 {
+      width: 200px; height: 200px;
+      background: var(--accent);
+      bottom: 20%; right: 10%;
+    }
+    .hero .container {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+    .hero-content { max-width: 600px; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.10);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--primary-light);
+      margin-bottom: 28px;
+    }
+    .hero-badge svg { width: 16px; height: 16px; fill: var(--accent); flex-shrink: 0; }
+    .hero h1 {
+      font-size: 3.8rem;
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero-subtitle {
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.80);
+      margin-bottom: 36px;
+      line-height: 1.5;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+      box-shadow: 0 4px 16px rgba(245,166,35,0.30);
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(245,166,35,0.35);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,0.30);
+    }
+    .btn-outline:hover {
+      border-color: var(--white);
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-2px);
+    }
+    .btn-call {
+      background: #22c55e;
+      color: var(--white);
+      box-shadow: 0 4px 16px rgba(34,197,94,0.30);
+      font-size: 1.15rem;
+      padding: 16px 36px;
+    }
+    .btn-call:hover {
+      background: #16a34a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(34,197,94,0.35);
+    }
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+    .hero-stat h3 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+    }
+    .hero-stat p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.65);
+      margin-top: 4px;
+    }
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-card {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      width: 100%;
+      max-width: 420px;
+    }
+    .hero-card-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(245,166,35,0.15);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+    .hero-card h4 {
+      color: var(--white);
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .hero-card p {
+      color: rgba(255,255,255,0.70);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+    .hero-card-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.85rem;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .hero-card-item:last-child { border-bottom: none; }
+    .hero-card-item svg { width: 18px; height: 18px; fill: var(--accent); flex-shrink: 0; }
+
+    /* ===== SECTION BASE ===== */
+    section { padding: 100px 0; }
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+    .section-desc {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      max-width: 640px;
+      line-height: 1.7;
+    }
+    .section-desc.center { margin: 0 auto; text-align: center; }
+    .section-title.center { text-align: center; }
+    .section-tag.center { margin: 0 auto 12px; display: flex; justify-content: center; }
+
+    /* ===== SERVICES ===== */
+    #services { background: var(--bg-alt); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 28px;
+      margin-top: 48px;
+    }
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: 1px solid rgba(10,92,138,0.06);
+      position: relative;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 18px;
+    }
+    .service-icon.wash { background: #d4eaf7; }
+    .service-icon.dry { background: #e0f0e8; }
+    .service-icon.interior { background: #f0e8f5; }
+    .service-icon.tire { background: #f5f0e0; }
+    .service-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .service-card p {
+      color: var(--text-light);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+    .service-price {
+      display: inline-block;
+      margin-top: 16px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 6px 16px;
+      border-radius: 30px;
+    }
+
+    /* ===== CAFE ===== */
+    #cafe { background: var(--bg); }
+    .cafe-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-top: 12px;
+    }
+    .cafe-image {
+      background: linear-gradient(135deg, #f8f3e0 0%, #f0e8d0 100%);
+      border-radius: var(--radius-lg);
+      min-height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cafe-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 60%, rgba(245,166,35,0.10) 0%, transparent 60%);
+    }
+    .cafe-image-content {
+      text-align: center;
+      font-size: 5rem;
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+    }
+    .cafe-image-content .sub {
+      display: block;
+      font-size: 1rem;
+      color: #8a7a5a;
+      margin-top: 12px;
+      font-weight: 600;
+    }
+    .cafe-image-decoration {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(245,166,35,0.06);
+    }
+    .cafe-image-decoration.d1 { width: 200px; height: 200px; top: -40px; right: -40px; }
+    .cafe-image-decoration.d2 { width: 140px; height: 140px; bottom: -20px; left: -20px; }
+    .cafe-features {
+      display: grid;
+      gap: 20px;
+      margin-top: 28px;
+    }
+    .cafe-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .cafe-feature-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--primary-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+    .cafe-feature h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .cafe-feature p {
+      font-size: 0.88rem;
+      color: var(--text-light);
+    }
+
+    /* ===== REVIEWS ===== */
+    #reviews { background: var(--bg-alt); }
+    .reviews-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .reviews-rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      padding: 6px 20px 6px 16px;
+      border-radius: 40px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      margin-bottom: 16px;
+    }
+    .reviews-rating-stars {
+      display: flex;
+      gap: 2px;
+    }
+    .reviews-rating-stars svg { width: 18px; height: 18px; fill: var(--accent); }
+    .reviews-rating span {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .review-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(10,92,138,0.06);
+    }
+    .review-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 14px;
+    }
+    .review-stars svg { width: 16px; height: 16px; fill: var(--accent); }
+    .review-text {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .review-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+    .review-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .review-source {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+    .reviews-footer {
+      text-align: center;
+      margin-top: 36px;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    /* ===== CONTACT / BOOKING ===== */
+    #contact { background: var(--bg); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 40px;
+    }
+    .contact-info h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .contact-item-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--primary-light);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.2rem;
+    }
+    .contact-item h4 {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+    }
+    .contact-item p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+    .contact-item a {
+      color: var(--primary);
+      font-weight: 500;
+    }
+    .contact-item a:hover { text-decoration: underline; }
+    .contact-form {
+      background: var(--bg-alt);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      border: 1px solid rgba(10,92,138,0.08);
+    }
+    .contact-form h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .contact-form > p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 24px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid rgba(10,92,138,0.15);
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-family: inherit;
+      transition: var(--transition);
+      background: var(--white);
+      color: var(--text);
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(10,92,138,0.10);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .btn-submit {
+      width: 100%;
+      background: var(--primary);
+      color: var(--white);
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+    .btn-submit:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(10,92,138,0.25);
+    }
+
+    /* ===== MAP ===== */
+    .map-container {
+      margin-top: 24px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(10,92,138,0.08);
+    }
+    .map-placeholder {
+      background: var(--bg-alt);
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      text-align: center;
+    }
+    .map-placeholder-icon {
+      font-size: 2.5rem;
+    }
+    .map-placeholder a {
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: underline;
+      font-size: 0.95rem;
+    }
+    .map-placeholder a:hover { color: var(--primary-dark); }
+    .map-placeholder p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    /* ===== CALL BUTTON ===== */
+    .call-banner {
+      background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+      border-radius: var(--radius-lg);
+      padding: 28px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 28px;
+      color: var(--white);
+    }
+    .call-banner-text h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    .call-banner-text p {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-top: 4px;
+    }
+    .call-banner-btn {
+      background: var(--white);
+      color: #16a34a !important;
+      padding: 14px 32px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+    .call-banner-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--bg-dark);
+      color: rgba(255,255,255,0.80);
+      padding: 60px 0 30px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 40px;
+    }
+    .footer-brand h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .footer-brand p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.60);
+      max-width: 300px;
+    }
+    .footer-col h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+    .footer-col ul li a {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.60);
+      transition: var(--transition);
+    }
+    .footer-col ul li a:hover { color: var(--white); }
+    .footer-hours-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.60);
+      margin-bottom: 6px;
+    }
+    .footer-hours-item strong { color: rgba(255,255,255,0.80); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ===== SCROLL ANIMATIONS ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .hero .container { grid-template-columns: 1fr; gap: 40px; }
+      .hero-content { max-width: 100%; text-align: center; }
+      .hero-buttons { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .hero-visual { display: none; }
+      .hero h1 { font-size: 3rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .cafe-grid { grid-template-columns: 1fr; }
+      .cafe-image { min-height: 260px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .call-banner { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 70px 0; }
+      .hero h1 { font-size: 2.4rem; }
+      .hero-subtitle { font-size: 1.1rem; }
+      .hero-stats { flex-direction: column; gap: 16px; align-items: center; text-align: center; }
+      .section-title { font-size: 1.9rem; }
+      .nav-links { display: none; }
+      .nav-links.mobile-open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(255,255,255,0.98);
+        backdrop-filter: blur(12px);
+        padding: 20px 24px;
+        border-bottom: 1px solid rgba(10,92,138,0.08);
+        gap: 16px;
+      }
+      .nav-links.mobile-open a { font-size: 1rem; }
+      .mobile-menu-btn {
+        display: flex !important;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 4px;
+      }
+      .mobile-menu-btn span {
+        display: block;
+        width: 24px;
+        height: 2.5px;
+        background: var(--text);
+        border-radius: 2px;
+        transition: var(--transition);
+      }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+      .lang-switcher { top: 14px; right: 70px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .contact-form { padding: 24px; }
+      .call-banner { padding: 24px; }
+      .call-banner-btn { width: 100%; justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2rem; }
+      .hero-subtitle { font-size: 1rem; }
+      .btn { padding: 12px 24px; font-size: 0.9rem; }
+      .container { padding: 0 16px; }
+      .lang-switcher { right: 60px; }
+      .lang-switcher button { padding: 4px 10px; font-size: 0.75rem; }
+    }
+
+    .mobile-menu-btn { display: none; }
+    @media (max-width: 768px) {
+      .mobile-menu-btn { display: flex !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== LANGUAGE SWITCHER ===== -->
+  <div class="lang-switcher" role="radiogroup" aria-label="Selectează limba / Выберите язык">
+    <button data-lang="ro" class="active" role="radio" aria-checked="true" onclick="switchLang('ro')">RO</button>
+    <button data-lang="ru" role="radio" aria-checked="false" onclick="switchLang('ru')">RU</button>
+  </div>
+
+  <!-- ===== NAV ===== -->
+  <nav class="nav">
+    <div class="container">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-icon">🧼</div>
+        Wash Time
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#services" data-lang-ro="Servicii" data-lang-ru="Услуги">Servicii</a>
+        <a href="#cafe" data-lang-ro="Cafenea" data-lang-ru="Кафе">Cafenea</a>
+        <a href="#reviews" data-lang-ro="Recenzii" data-lang-ru="Отзывы">Recenzii</a>
+        <a href="#contact" data-lang-ro="Contacte" data-lang-ru="Контакты">Contacte</a>
+        <a href="#contact" class="nav-cta" data-lang-ro="Programează-te" data-lang-ru="Записаться">Programează-te</a>
+      </div>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Meniu / Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-shapes">
+      <div class="hero-shape hero-shape-1"></div>
+      <div class="hero-shape hero-shape-2"></div>
+      <div class="hero-shape hero-shape-3"></div>
+    </div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <span data-lang-ro="4.5 ⭐ (306 recenzii)" data-lang-ru="4.5 ⭐ (306 отзывов)">4.5 ⭐ (306 recenzii)</span>
+        </div>
+        <h1>Wash <span>Time</span></h1>
+        <p class="hero-subtitle" data-lang-ro="Spălătorie auto rapidă și de calitate — sari peste rând. Programează-te online și economisește timp prețios." data-lang-ru="Быстрая и качественная автомойка — без очереди. Запишитесь онлайн и экономьте драгоценное время.">
+          Spălătorie auto rapidă și de calitate — sari peste rând. Programează-te online și economisește timp prețios.
+        </p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary" data-lang-ro="📅 Programează-te" data-lang-ru="📅 Записаться">📅 Programează-te</a>
+          <a href="tel:+37360500003" class="btn btn-call">📞 +373 605 00 003</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <h3 data-lang-ro="5+" data-lang-ru="5+">5+</h3>
+            <p data-lang-ro="Ani de experiență" data-lang-ru="Лет опыта">Ani de experiență</p>
+          </div>
+          <div class="hero-stat">
+            <h3>10 000+</h3>
+            <p data-lang-ro="Mașini spălate" data-lang-ru="Машин вымыто">Mașini spălate</p>
+          </div>
+          <div class="hero-stat">
+            <h3 data-lang-ro="4.5 ⭐" data-lang-ru="4.5 ⭐">4.5 ⭐</h3>
+            <p data-lang-ro="Evaluare medie" data-lang-ru="Средняя оценка">Evaluare medie</p>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="hero-card-icon">💧</div>
+          <h4 data-lang-ro="Programare rapidă" data-lang-ru="Быстрая запись">Programare rapidă</h4>
+          <p data-lang-ro="Alege ora și ziua — noi ne ocupăm de restul." data-lang-ru="Выберите время и день — остальное мы берем на себя.">Alege ora și ziua — noi ne ocupăm de restul.</p>
+          <div class="hero-card-item">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+            <span data-lang-ro="Fără așteptare" data-lang-ru="Без ожидания">Fără așteptare</span>
+          </div>
+          <div class="hero-card-item">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+            <span data-lang-ro="Prețuri rezonabile" data-lang-ru="Доступные цены">Prețuri rezonabile</span>
+          </div>
+          <div class="hero-card-item">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+            <span data-lang-ro="Cafea în timpul așteptării" data-lang-ru="Кофе во время ожидания">Cafea în timpul așteptării</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <section id="services">
+    <div class="container">
+      <div class="section-tag center" data-lang-ro="✦ Ce oferim" data-lang-ru="✦ Что мы предлагаем">✦ Ce oferim</div>
+      <h2 class="section-title center" data-lang-ro="Serviciile Noastre" data-lang-ru="Наши Услуги">Serviciile Noastre</h2>
+      <p class="section-desc center" data-lang-ro="De la o spălare rapidă până la o curățare completă — avem tot ce ai nevoie pentru mașina ta, la prețuri rezonabile." data-lang-ru="От быстрой мойки до полной чистки — у нас есть всё для вашего автомобиля по доступным ценам.">
+        De la o spălare rapidă până la o curățare completă — avem tot ce ai nevoie pentru mașina ta, la prețuri rezonabile.
+      </p>
+      <div class="services-grid fade-up">
+        <div class="service-card">
+          <div class="service-icon wash">🚗</div>
+          <h3 data-lang-ro="Spălare Auto Exterioară" data-lang-ru="Наружная Мойка">Spălare Auto Exterioară</h3>
+          <p data-lang-ro="Spălare profesională a exteriorului cu produse de calitate. Îndepărtăm eficient murdăria și praful, lăsând mașina strălucitoare." data-lang-ru="Профессиональная наружная мойка качественными средствами. Эффективно удаляем грязь и пыль.">
+            Spălare profesională a exteriorului cu produse de calitate. Îndepărtăm eficient murdăria și praful, lăsând mașina strălucitoare.
+          </p>
+          <div class="service-price" data-lang-ro="de la 150 MDL" data-lang-ru="от 150 MDL">de la 150 MDL</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon dry">💨</div>
+          <h3 data-lang-ro="Uscare Completă" data-lang-ru="Полная Сушка">Uscare Completă</h3>
+          <p data-lang-ro="Uscare minuțioasă a întregii mașini. Fără pete de apă, fără urme — doar o suprafață impecabilă și lucioasă." data-lang-ru="Тщательная сушка всего автомобиля. Без водяных пятен — безупречный блеск.">
+            Uscare minuțioasă a întregii mașini. Fără pete de apă, fără urme — doar o suprafață impecabilă și lucioasă.
+          </p>
+          <div class="service-price" data-lang-ro="+ 80 MDL" data-lang-ru="+ 80 MDL">+ 80 MDL</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon interior">🧹</div>
+          <h3 data-lang-ro="Curățare Interior" data-lang-ru="Чистка Салона">Curățare Interior</h3>
+          <p data-lang-ro="Curățare profesională a habitaclului: aspirator, ștergere praf, tratament pentru suprafețe. Interiorul mașinii tale va arăta ca nou." data-lang-ru="Профессиональная чистка салона: пылесос, удаление пыли, обработка поверхностей.">
+            Curățare profesională a habitaclului: aspirator, ștergere praf, tratament pentru suprafețe. Interiorul mașinii tale va arăta ca nou.
+          </p>
+          <div class="service-price" data-lang-ro="de la 200 MDL" data-lang-ru="от 200 MDL">de la 200 MDL</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon tire">🔧</div>
+          <h3 data-lang-ro="Montare Anvelope &amp; Vulcanizare" data-lang-ru="Шиномонтаж и Вулканизация">Montare Anvelope &amp; Vulcanizare</h3>
+          <p data-lang-ro="Colaborăm cu parteneri de încredere pentru montarea anvelopelor și vulcanizare. Îți recomandăm cei mai buni specialiști din Chișinău." data-lang-ru="Сотрудничаем с надежными партнерами по шиномонтажу и вулканизации. Лучшие специалисты в Кишиневе.">
+            Colaborăm cu parteneri de încredere pentru montarea anvelopelor și vulcanizare. Îți recomandăm cei mai buni specialiști din Chișinău.
+          </p>
+          <div class="service-price" data-lang-ro="Prețuri partenere" data-lang-ru="Цены партнеров">Prețuri partenere</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CAFE ===== -->
+  <section id="cafe">
+    <div class="container">
+      <div class="cafe-grid">
+        <div>
+          <div class="section-tag" data-lang-ro="✦ Relaxare" data-lang-ru="✦ Отдых">✦ Relaxare</div>
+          <h2 class="section-title" data-lang-ro="Zonă de Așteptare cu Cafea" data-lang-ru="Зона Ожидания с Кофе">Zonă de Așteptare cu Cafea</h2>
+          <p class="section-desc" data-lang-ro="În timp ce îți îngrijim mașina, tu te poți relaxa într-un spațiu confortabil cu o ceașcă de cafea proaspătă. Wifi gratuit, atmosferă plăcută." data-lang-ru="Пока мы заботимся о вашем автомобиле, вы можете отдохнуть в уютном пространстве с чашечкой свежего кофе. Бесплатный WiFi, приятная атмосфера.">
+            În timp ce îți îngrijim mașina, tu te poți relaxa într-un spațiu confortabil cu o ceașcă de cafea proaspătă. Wifi gratuit, atmosferă plăcută.
+          </p>
+          <div class="cafe-features">
+            <div class="cafe-feature">
+              <div class="cafe-feature-icon">☕</div>
+              <div>
+                <h4 data-lang-ro="Cafea de specialitate" data-lang-ru="Кофе премиум-класса">Cafea de specialitate</h4>
+                <p data-lang-ro="Savurează o cafea proaspăt preparată în timp ce aștepți." data-lang-ru="Наслаждайтесь свежесваренным кофе.">Savurează o cafea proaspăt preparată în timp ce aștepți.</p>
+              </div>
+            </div>
+            <div class="cafe-feature">
+              <div class="cafe-feature-icon">📶</div>
+              <div>
+                <h4 data-lang-ro="Wifi gratuit" data-lang-ru="Бесплатный WiFi">Wifi gratuit</h4>
+                <p data-lang-ro="Rămâi conectat în timp ce îți spălăm mașina." data-lang-ru="Оставайтесь на связи.">Rămâi conectat în timp ce îți spălăm mașina.</p>
+              </div>
+            </div>
+            <div class="cafe-feature">
+              <div class="cafe-feature-icon">🛋️</div>
+              <div>
+                <h4 data-lang-ro="Spațiu confortabil" data-lang-ru="Уютное пространство">Spațiu confortabil</h4>
+                <p data-lang-ro="Personal primitor și atmosferă plăcută." data-lang-ru="Приветливый персонал и приятная атмосфера.">Personal primitor și atmosferă plăcută.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cafe-image">
+          <div class="cafe-image-decoration d1"></div>
+          <div class="cafe-image-decoration d2"></div>
+          <div class="cafe-image-content">
+            ☕
+            <span class="sub" data-lang-ro="Relaxează-te cu o cafea" data-lang-ru="Отдохните с чашечкой кофе">Relaxează-te cu o cafea</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REVIEWS ===== -->
+  <section id="reviews">
+    <div class="container">
+      <div class="reviews-header">
+        <div class="reviews-rating">
+          <div class="reviews-rating-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <span data-lang-ro="4.5 din 5 — 306 recenzii" data-lang-ru="4.5 из 5 — 306 отзывов">4.5 din 5 — 306 recenzii</span>
+        </div>
+        <h2 class="section-title center" data-lang-ro="Ce Spun Clienții Noștri" data-lang-ru="Что Говорят Наши Клиенты">Ce Spun Clienții Noștri</h2>
+        <p class="section-desc center" data-lang-ro="Peste 10.000 de mașini spălate și sute de clienți mulțumiți." data-lang-ru="Более 10 000 вымытых машин и сотни довольных клиентов.">Peste 10.000 de mașini spălate și sute de clienți mulțumiți.</p>
+      </div>
+      <div class="reviews-grid fade-up">
+        <!-- Review 1 — Elena E. -->
+        <div class="review-card">
+          <div class="review-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="review-text" data-lang-ro=""Managerul care face programările este un domn foarte plăcut! Au și un loc foarte frumos de așteptat cu o cafea, în timp ce mașinile sunt spălate."" data-lang-ru=""Менеджер, который принимает записи — очень приятный господин! У них также очень уютное место для ожидания с кофе, пока моют машины."">"Managerul care face programările este un domn foarte plăcut! Au și un loc foarte frumos de așteptat cu o cafea, în timp ce mașinile sunt spălate."</p>
+          <div class="review-author">
+            <div class="review-avatar">EE</div>
+            <div>
+              <div class="review-name">Elena E.</div>
+              <div class="review-source">Google Reviews</div>
+            </div>
+          </div>
+        </div>
+        <!-- Review 2 — Sergiu Șveț -->
+        <div class="review-card">
+          <div class="review-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="review-text" data-lang-ro=""Curățare rapidă a mașinii la prețuri rezonabile. Este necesară programarea, dacă vrei să speli mașina."" data-lang-ru=""Быстрая мойка машины по доступным ценам. Запись обязательна, если хотите помыть машину."">"Curățare rapidă a mașinii la prețuri rezonabile. Este necesară programarea, dacă vrei să speli mașina."</p>
+          <div class="review-author">
+            <div class="review-avatar">SȘ</div>
+            <div>
+              <div class="review-name">Sergiu Șveț</div>
+              <div class="review-source">Google Reviews</div>
+            </div>
+          </div>
+        </div>
+        <!-- Review 3 — Igor Konstantinov -->
+        <div class="review-card">
+          <div class="review-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="review-text" data-lang-ro=""Serviciu rapid și de înaltă calitate. Poți programa prin telefon. Există o cafenea unde te poți relaxa cu o ceașcă de cafea."" data-lang-ru=""Быстрое, качественное обслуживание. Можно записаться по телефону. Есть кафе, где можно отдохнуть за чашкой кофе."">"Serviciu rapid și de înaltă calitate. Poți programa prin telefon. Există o cafenea unde te poți relaxa cu o ceașcă de cafea."</p>
+          <div class="review-author">
+            <div class="review-avatar">IK</div>
+            <div>
+              <div class="review-name">Igor Konstantinov</div>
+              <div class="review-source">Google Reviews</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Secondary row with 2 more reviews -->
+      <div class="reviews-grid fade-up" style="margin-top:24px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
+        <!-- Review 4 — Veaceslav Celpan -->
+        <div class="review-card">
+          <div class="review-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="review-text" data-lang-ro=""Băieții sunt cu adevărat uimitori, spală mașina foarte bine."" data-lang-ru=""Ребята действительно классные, моют машину очень хорошо."">"Băieții sunt cu adevărat uimitori, spală mașina foarte bine."</p>
+          <div class="review-author">
+            <div class="review-avatar">VC</div>
+            <div>
+              <div class="review-name">Veaceslav Celpan</div>
+              <div class="review-source">Google Reviews</div>
+            </div>
+          </div>
+        </div>
+        <!-- Review 5 — M T -->
+        <div class="review-card">
+          <div class="review-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="review-text" data-lang-ro=""Loc bun pentru spălat mașina, oameni drăguți. Te poți programa înainte să vii și timpul de așteptare dispare."" data-lang-ru=""Хорошее место для мойки машины, приятные люди. Можно записаться заранее, и время ожидания исчезает."">"Loc bun pentru spălat mașina, oameni drăguți. Te poți programa înainte să vii și timpul de așteptare dispare."</p>
+          <div class="review-author">
+            <div class="review-avatar">MT</div>
+            <div>
+              <div class="review-name">M T</div>
+              <div class="review-source">Google Reviews</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reviews-footer">
+        <span data-lang-ro="🌟 Pe baza a 306 recenzii verificate pe Google" data-lang-ru="🌟 На основе 306 проверенных отзывов на Google">🌟 Pe baza a 306 recenzii verificate pe Google</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT / BOOKING ===== -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-tag center" data-lang-ro="✦ Contactează-ne" data-lang-ru="✦ Свяжитесь с нами">✦ Contactează-ne</div>
+      <h2 class="section-title center" data-lang-ro="Programează-te sau Contactează-ne" data-lang-ru="Запишитесь или Свяжитесь с нами">Programează-te sau Contactează-ne</h2>
+      <p class="section-desc center" data-lang-ro="Sună-ne, scrie-ne sau vino direct — suntem aici pentru tine." data-lang-ru="Позвоните, напишите или приходите — мы здесь для вас.">Sună-ne, scrie-ne sau vino direct — suntem aici pentru tine.</p>
+
+      <!-- Prominent call button banner -->
+      <div class="call-banner">
+        <div class="call-banner-text">
+          <h3 data-lang-ro="📞 Sună acum și programează-te!" data-lang-ru="📞 Звоните сейчас и записывайтесь!">📞 Sună acum și programează-te!</h3>
+          <p data-lang-ro="Răspundem la telefon de luni până duminică, 08:00 – 21:00" data-lang-ru="Отвечаем на звонки с понедельника по воскресенье, 08:00 – 21:00">Răspundem la telefon de luni până duminică, 08:00 – 21:00</p>
+        </div>
+        <a href="tel:+37360500003" class="call-banner-btn">📞 +373 605 00 003</a>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3 data-lang-ro="Informații de Contact" data-lang-ru="Контактная Информация">Informații de Contact</h3>
+          <!-- Address -->
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div>
+            <div>
+              <h4 data-lang-ro="Adresă" data-lang-ru="Адрес">Adresă</h4>
+              <p data-lang-ro="Strada Bariera Sculeni 9/3, Chișinău, Moldova" data-lang-ru="ул. Барьера Скулений 9/3, Кишинев, Молдова">Strada Bariera Sculeni 9/3, Chișinău, Moldova</p>
+            </div>
+          </div>
+          <!-- Map -->
+          <div class="map-container">
+            <div class="map-placeholder">
+              <div class="map-placeholder-icon">🗺️</div>
+              <p data-lang-ro="Vezi pe Google Maps" data-lang-ru="Посмотреть на Google Картах">Vezi pe Google Maps</p>
+              <a href="https://www.google.com/maps/search/?api=1&query=Strada+Bariera+Sculeni+9%2F3+Chi%C8%99in%C4%83u" target="_blank" rel="noopener" data-lang-ro="Deschide în Google Maps →" data-lang-ru="Открыть в Google Картах →">Deschide în Google Maps →</a>
+            </div>
+          </div>
+          <!-- Phone -->
+          <div class="contact-item">
+            <div class="contact-item-icon">📞</div>
+            <div>
+              <h4 data-lang-ro="Telefon" data-lang-ru="Телефон">Telefon</h4>
+              <p><a href="tel:+37360500003" style="font-size:1.15rem;font-weight:600;">+373 605 00 003</a></p>
+            </div>
+          </div>
+          <!-- Hours -->
+          <div class="contact-item">
+            <div class="contact-item-icon">🕐</div>
+            <div>
+              <h4 data-lang-ro="Program de Lucru" data-lang-ru="Часы Работы">Program de Lucru</h4>
+              <p data-lang-ro="Luni — Duminică: 08:00 – 21:00" data-lang-ru="Понедельник — Воскресенье: 08:00 – 21:00">Luni — Duminică: 08:00 – 21:00</p>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form">
+          <h3 data-lang-ro="Formular de Programare" data-lang-ru="Форма Записи">Formular de Programare</h3>
+          <p data-lang-ro="Completează formularul și te vom contacta în cel mai scurt timp." data-lang-ru="Заполните форму, и мы свяжемся с вами в ближайшее время.">Completează formularul și te vom contacta în cel mai scurt timp.</p>
+          <form onsubmit="handleFormSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name" data-lang-ro="Nume" data-lang-ru="Имя">Nume</label>
+                <input type="text" id="name" name="name" required />
+              </div>
+              <div class="form-group">
+                <label for="phone" data-lang-ro="Telefon" data-lang-ru="Телефон">Telefon</label>
+                <input type="tel" id="phone" name="phone" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="service" data-lang-ro="Serviciu dorit" data-lang-ru="Желаемая услуга">Serviciu dorit</label>
+              <select id="service" name="service">
+                <option value="wash" data-lang-ro="Spălare auto — de la 150 MDL" data-lang-ru="Мойка — от 150 MDL">Spălare auto — de la 150 MDL</option>
+                <option value="wash+dry" data-lang-ro="Spălare + Uscare — de la 230 MDL" data-lang-ru="Мойка + Сушка — от 230 MDL">Spălare + Uscare — de la 230 MDL</option>
+                <option value="full" data-lang-ro="Pachet complet — de la 430 MDL" data-lang-ru="Полный пакет — от 430 MDL">Pachet complet — de la 430 MDL</option>
+                <option value="interior" data-lang-ro="Curățare interior — de la 200 MDL" data-lang-ru="Чистка салона — от 200 MDL">Curățare interior — de la 200 MDL</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message" data-lang-ro="Mesaj (opțional)" data-lang-ru="Сообщение (необязательно)">Mesaj (opțional)</label>
+              <textarea id="message" name="message"></textarea>
+            </div>
+            <button type="submit" class="btn-submit" data-lang-ro="Trimite cererea" data-lang-ru="Отправить заявку">Trimite cererea</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>🧼 Wash Time</h3>
+          <p data-lang-ro="Spălătorie auto rapidă și de calitate în Chișinău. Programare online, prețuri rezonabile, zonă de așteptare cu cafea." data-lang-ru="Быстрая и качественная автомойка в Кишиневе. Онлайн-запись, доступные цены, зона ожидания с кофе.">
+            Spălătorie auto rapidă și de calitate în Chișinău. Programare online, prețuri rezonabile, zonă de așteptare cu cafea.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4 data-lang-ro="Navigare" data-lang-ru="Навигация">Navigare</h4>
+          <ul>
+            <li><a href="#services" data-lang-ro="Servicii" data-lang-ru="Услуги">Servicii</a></li>
+            <li><a href="#cafe" data-lang-ro="Cafenea" data-lang-ru="Кафе">Cafenea</a></li>
+            <li><a href="#reviews" data-lang-ro="Recenzii" data-lang-ru="Отзывы">Recenzii</a></li>
+            <li><a href="#contact" data-lang-ro="Contacte" data-lang-ru="Контакты">Contacte</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-lang-ro="Contact" data-lang-ru="Контакты">Contact</h4>
+          <ul>
+            <li><a href="tel:+37360500003">+373 605 00 003</a></li>
+            <li><a href="https://www.google.com/maps/search/?api=1&query=Strada+Bariera+Sculeni+9%2F3+Chi%C8%99in%C4%83u" target="_blank" rel="noopener" data-lang-ro="Hartă" data-lang-ru="Карта">Hartă</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-lang-ro="Program" data-lang-ru="График">Program</h4>
+          <div class="footer-hours-item">
+            <span data-lang-ro="Luni — Duminică" data-lang-ru="Пн — Вс">Luni — Duminică</span>
+            <strong>08:00 – 21:00</strong>
+          </div>
+          <div style="margin-top: 16px;">
+            <a href="tel:+37360500003" style="display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:var(--white);padding:10px 20px;border-radius:40px;font-size:0.85rem;font-weight:600;">
+              📞 <span data-lang-ro="Sună acum" data-lang-ru="Позвонить">Sună acum</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Wash Time. Toate drepturile rezervate.</span>
+        <span data-lang-ro="Chișinău, Moldova" data-lang-ru="Кишинев, Молдова">Chișinău, Moldova</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ---- Language Switching ----
+    let currentLang = localStorage.getItem('wash-time-lang') || 'ro';
+
+    function switchLang(lang) {
+      currentLang = lang;
+
+      document.querySelectorAll('.lang-switcher button').forEach(btn => {
+        const isActive = btn.getAttribute('data-lang') === lang;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-checked', isActive ? 'true' : 'false');
+      });
+
+      document.querySelectorAll('[data-lang-ro]').forEach(el => {
+        const ro = el.getAttribute('data-lang-ro');
+        const ru = el.getAttribute('data-lang-ru');
+        const text = lang === 'ro' ? ro : ru;
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.placeholder = text;
+          return;
+        }
+        if (el.tagName === 'OPTION') {
+          el.textContent = text;
+          return;
+        }
+        el.textContent = text;
+      });
+
+      document.documentElement.lang = lang;
+      localStorage.setItem('wash-time-lang', lang);
+    }
+
+    // Apply saved language on load
+    switchLang(currentLang);
+
+    // ---- Mobile Menu ----
+    function toggleMobileMenu() {
+      document.getElementById('navLinks').classList.toggle('mobile-open');
+    }
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('mobile-open');
+      });
+    });
+
+    // ---- Scroll Animations ----
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    document.querySelectorAll('.service-card').forEach((card, i) => {
+      card.classList.add('fade-up');
+      card.style.transitionDelay = (i * 0.1) + 's';
+      observer.observe(card);
+    });
+    document.querySelectorAll('.review-card').forEach((card, i) => {
+      card.classList.add('fade-up');
+      card.style.transitionDelay = (i * 0.1) + 's';
+      observer.observe(card);
+    });
+
+    // ---- Form Handler ----
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const service = document.getElementById('service');
+      const serviceText = service.options[service.selectedIndex].text;
+
+      const message = currentLang === 'ro'
+        ? `Salut! Aș dori să programez o întâlnire.\n\nNume: ${name}\nTelefon: ${phone}\nServiciu: ${serviceText}\n\nVă mulțumesc!`
+        : `Здравствуйте! Хочу записаться.\n\nИмя: ${name}\nТелефон: ${phone}\nУслуга: ${serviceText}\n\nСпасибо!`;
+
+      const encoded = encodeURIComponent(message);
+      window.open(`https://wa.me/37360500003?text=${encoded}`, '_blank');
+
+      const btn = e.target.querySelector('.btn-submit');
+      const originalText = btn.textContent;
+      btn.textContent = currentLang === 'ro' ? '✓ Cerere trimisă!' : '✓ Заявка отправлена!';
+      btn.style.background = '#22c55e';
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+        e.target.reset();
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
